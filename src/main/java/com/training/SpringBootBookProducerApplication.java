@@ -39,6 +39,8 @@ public class SpringBootBookProducerApplication /* implements CommandLineRunner *
             System.out.println(bookRepo.findByTitle("C"));
             System.out.println(bookRepo.findByTitleLike("C%"));
             System.out.println(bookRepo.getByStockIsGreater(1021l));
+
+            System.out.println(bookRepo.updateStockTitle("C%", 25l));
         };
     }
 

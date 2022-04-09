@@ -2,10 +2,12 @@ package com.training.repo;
 
 import com.training.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -19,4 +21,10 @@ public interface BookRepo extends JpaRepository<Book, Long> {
 
     @Query("from Book b where b.stock > :stock")
     List<Book> getByStockIsGreater(@Param("stock") Long stock);
+
+    // update stock of all the books that are titled with pattern C
+    @Transactional
+    @Modifying
+    @Query("update Book b set b.stock= b.stock + :newstock where b.title like :pattern")
+    int updateStockTitle(@Param("pattern") String titlePattern, @Param("newstock") Long newStock);
 }
