@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 /**
  * Created by ericjdube on 4/8/2022 5:17 PM
@@ -20,9 +22,12 @@ public class Book {
     @Id  // primary key
     private Long isbn;
 
+    @Column(name = "book_title")
     private String title;
+
     private Double price;
     private Long stock;
+    private LocalDate dateOfPublishing;
 
 
 }
